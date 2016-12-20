@@ -7,10 +7,13 @@
 		TODO:
 			Button to expand/collapse all.
 			
-			Use templates for:
-				header
-				footer
+			Navigation menu in header.html.
+			
+			Use templates (twig?) for:
 				accordion item
+			
+			
+			Add recent notes on index.php? (okay but when we have templating to reduce duplication)
 	-->
 	
 	<meta charset="UTF-8">
@@ -22,44 +25,42 @@
 	<link rel="shortcut icon" href="img/content/moteIcon-64x64-Transparent.png" />
 	
 	<script src="vendor/jquery-3.1.1.min.js"></script>
+	
+	<link rel="stylesheet" href="vendor/w3.css">
+	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/accordion.css">
 	
+	<title>Mote</title>
 	
-	<script>
-	function accordionClick(b) {
-		
-		// Make it clear which accordion element we clicked on.
-		$(b).toggleClass("active");
-		// Drop the accordion content by changing the class.
-		$(b).next().toggleClass("show");
-	}
-	</script>
-	
-	
+<script>
+</script>
 </head>
 <body>
+<?php include(realpath(dirname(__FILE__) . "./header.html")); ?>
 
-<section class="accordion">
-	<h2>Notes</h2>
-	<div class="accordion-div">
-	<?php
-		require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
-		$client = new MoteClient();
-		$items = $client->getNotes(null, 0, $config["web"]["defaultNoteCount"]);
-		
-		foreach ($items as $item)
-		{
-			echo "<button class='expand-btn' onclick='accordionClick(this)'>" . $item["category_name"] . " | " . $item["title"] . "</button>";
+<article>
+	<h3>Find note:</h3>
+	<form action="notes.php">
+		<p>Category</p>
+		<select name="category_id" class="w3-btn" id="category-select" onchange="selectCategory()">
+		<?php
+			require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
 			
-			echo "<div id='note-" . $item["id"] . "' class='panel'>";
-			echo "<p>Created : " . $item["when_created"] . "</p>";
-			echo "<p>Updated : " . $item["when_updated"] . "</p>";
-			echo "<p>" . $item["content"] . "</p>";
-			echo "</div>";
-		}
-	?>
-	</div>
-</section>
+			$client = new MoteClient();
+			$items = $client->getNoteCategories();
+			
+			echo "<option value=''>All Categories</option>";
+			
+			foreach ($items as $item)
+				echo "<option value=" . $item["id"] . ">" . $item["name"] . "</option>";
+		?>
+		</select>
+		<p>Title</p>
+		<input class="w3-btn" type="text" name="title"></input><br/><br/>
+		<input class="w3-btn" type="submit" value="Find"></input>
+	</form>
+</article>
 
+<?php include(realpath(dirname(__FILE__) . "./footer.html")); ?>
 </body>
 </html>

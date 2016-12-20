@@ -17,12 +17,20 @@ class MoteClient
 		$this->client = new MySqlClient($config["db"]);
 	}
 	
-	public function getNotes($id = null, $offset = null, $limit = null)
+	public function getNotes($id = null, $offset = null, $limit = null, $category_id = null, $title = null)
 	{
 		try
 		{
 			$q = "select n.*, nc.name as category_name from note n inner join note_category nc on (n.category_id = nc.id) ";
-			if (!is_null($id)) $q .= "where n.id = $id ";
+			
+			$wheres = [];
+			if (!is_null($id)) $wheres[] = "n.id = $id";
+			if (!is_null($category_id)) $wheres[] = "n.category_id = $category_id";
+			if (!is_null($title)) $wheres[] = "n.title like '%$title%'";
+			
+			if (!empty($wheres))
+				$q .= "where " . implode(" and ", $wheres) . " ";
+			
 			$q .= "order by n.when_updated desc ";
 			if (!is_null($limit)) $q .= "limit $limit ";
 			if (!is_null($offset)) $q .= "offset $offset ";
