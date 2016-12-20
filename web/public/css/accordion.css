@@ -17,7 +17,7 @@
 }
 
 .accordion button.expand-btn.active:after {
-    content: "-"; 
+	content: "-"; 
 }
 
 .accordion button.expand-btn.active, button.expand-btn:hover {

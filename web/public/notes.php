@@ -28,6 +28,11 @@ function accordionClick(b) {
 }
 
 </script>
+<style>
+.topnote {
+	font-size: x-small;
+}
+</style>
 </head>
 <body>
 <?php include(realpath(dirname(__FILE__) . "./header.html")); ?>
@@ -55,8 +60,7 @@ function accordionClick(b) {
 				echo "<button class='expand-btn' onclick='accordionClick(this)'>" . $item["category_name"] . " | " . $item["title"] . "</button>";
 				
 				echo "<div id='note-" . $item["id"] . "' class='panel'>";
-				echo "<p>Created : " . $item["when_created"] . "</p>";
-				echo "<p>Updated : " . $item["when_updated"] . "</p>";
+				echo "<p class='topnote'>Created " . $item["when_created"] . ", updated " . $item["when_updated"] . ". </p>";
 				echo "<p>" . $item["content"] . "</p>";
 				echo "</div>";
 			}

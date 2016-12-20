@@ -5,15 +5,18 @@
 	
 	<!--
 		TODO:
-			Button to expand/collapse all.
-			
 			Navigation menu in header.html.
 			
 			Use templates (twig?) for:
 				accordion item
 			
+			index.php:
+				Add recent notes on index.php? (okay but when we have templating to reduce duplication)
 			
-			Add recent notes on index.php? (okay but when we have templating to reduce duplication)
+			notes.php:
+				Better post format.
+				Button to expand/collapse all.
+				Order by dates.
 	-->
 	
 	<meta charset="UTF-8">
