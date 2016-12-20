@@ -17,12 +17,15 @@ class MoteClient
 		$this->client = new MySqlClient($config["db"]);
 	}
 	
-	public function getNotes($id = null)
+	public function getNotes($id = null, $offset = null, $limit = null)
 	{
 		try
 		{
 			$q = "select n.*, nc.name as category_name from note n inner join note_category nc on (n.category_id = nc.id) ";
-			if (!is_null($id)) $q .= "where n.id = $id";
+			if (!is_null($id)) $q .= "where n.id = $id ";
+			$q .= "order by n.when_updated desc ";
+			if (!is_null($limit)) $q .= "limit $limit ";
+			if (!is_null($offset)) $q .= "offset $offset ";
 			$q .= ";";
 			
 			$rows = $this->client->executeQuery($q);
@@ -100,7 +103,7 @@ class MoteClient
 		try
 		{
 			$q = "select * from note_category ";
-			if (!is_null($id)) $q .= "where id = $id";
+			if (!is_null($id)) $q .= "where id = $id ";
 			$q .= ";";
 			
 			$rows = $this->client->executeQuery($q);

@@ -7,17 +7,11 @@
 		TODO:
 			Button to expand/collapse all.
 			
-			Only show top x notes. Order by last updated ascending.
-			
 			Use templates for:
 				header
 				footer
 				accordion item
 	-->
-	
-	
-	
-	
 	
 	<meta charset="UTF-8">
 	<meta name="description" content="Simple public note database.">
@@ -51,7 +45,7 @@
 	<?php
 		require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
 		$client = new MoteClient();
-		$items = $client->getNotes();
+		$items = $client->getNotes(null, 0, $config["web"]["defaultNoteCount"]);
 		
 		foreach ($items as $item)
 		{

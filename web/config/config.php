@@ -12,7 +12,10 @@ $config = array(
 			"content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
 			"layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
 		)
-	)
+	),
+	"web" => array(
+		"defaultNoteCount" => 10,
+	),
 );
 
 /*
