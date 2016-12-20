@@ -1,6 +1,5 @@
 <?php
-	
-	//var_dump($_POST);
+	var_dump($_POST);
 	
 	try
 	{
@@ -8,25 +7,25 @@
 		
 		$delete = array_key_exists("delete", $_POST);
 		$id = $_POST["id"];
-		$name = $_POST["name"];
-		$description = $_POST["description"];
-		
+		$title = $_POST["title"];
+		$content = $_POST["content"];
+		$category_id = $_POST["category_id"];
 		
 		$client = new MoteClient();
 		
 		if (empty($id))
-			$client->insertNoteCategory($name, $description);
+			$client->insertNote($title, $content, $category_id);
 		else
 		{
 			if ($delete)
-				$client->deleteNoteCategory($id);
+				$client->deleteNote($id);
 			else
-				$client->updateNoteCategory($id, $name, $description);
+				$client->updateNote($id, $title, $content, $category_id);
 		}
 	}
 	catch (Exception $e) {}
 	
 	// Redirect browser once we're done here.
-	header("Location: /categories.php");
+	header("Location: /notes.php");
 	exit();
 ?>

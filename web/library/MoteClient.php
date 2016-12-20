@@ -45,6 +45,7 @@ class MoteClient
 			{
 				$items[] = array(
 					"id" => $row["id"],
+					"category_id" => $row["category_id"],
 					"title" => $row["title"],
 					"content" => $row["content"],
 					"category_name" => $row["category_name"],
@@ -62,12 +63,12 @@ class MoteClient
 		}
 	}
 	
-	public function insertNote($title, $content, $categoryId)
+	public function insertNote($title, $content, $category_id)
 	{
 		try
 		{
 			return $this->client->executeNonQuery(
-				"insert into note (title, content, category_id) values ('$title' ,'$content' ,$category_id);"
+				"insert into note (title, content, category_id) values ('$title' ,'$content', $category_id);"
 				);
 		}
 		catch (Exception $e)
@@ -77,7 +78,7 @@ class MoteClient
 		}
 	}
 	
-	public function updateNote($id, $title, $content)
+	public function updateNote($id, $title, $content, $category_id)
 	{
 		try
 		{
@@ -86,6 +87,7 @@ class MoteClient
 			$fields = [];
 			if (!is_null($title)) $fields[] = "title = '$title' ";
 			if (!is_null($content)) $fields[] = "content = '$content' ";
+			if (!is_null($category_id)) $fields[] = "category_id = '$category_id' ";
 			if (!empty($fields)) $q .= implode(", ", $fields) . " ";
 			
 			$q .= "where id = $id;";
@@ -147,8 +149,6 @@ class MoteClient
 	{
 		try
 		{
-			echo 'here';
-			
 			return $this->client->executeNonQuery(
 				"insert into note_category (name, description) values ('$name', '$description');"
 				);

@@ -7,6 +7,7 @@
 		TODO:
 			HANDLE SQL INJECTIONS!!
 			
+			Use htmlescape on inserted stuff.
 			Navigation sidebar menu in header.html.
 			Get rid of categories section.
 			Put search into sidebar.
@@ -51,7 +52,9 @@
 	</section>
 	
 	<section>
-		<h3>Find note</h3>
+		<h3>Notes</h3>
+		<a class="w3-btn" href="note.php">Create</a>
+		<h4>Find</h4>
 		<form action="notes.php">
 			<p>Category</p>
 			<select name="category_id" class="w3-btn" id="category-select" onchange="selectCategory()">

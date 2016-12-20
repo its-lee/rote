@@ -62,6 +62,7 @@ function accordionClick(b) {
 				echo "<div id='note-" . $item["id"] . "' class='panel'>";
 				echo "<p class='topnote'>Created " . $item["when_created"] . ", updated " . $item["when_updated"] . ". </p>";
 				echo "<p>" . $item["content"] . "</p>";
+				echo "<a class='w3-btn' href='/note.php?id=" . $item["id"] . "'>Edit</a>";
 				echo "</div>";
 			}
 			echo "</div>";
