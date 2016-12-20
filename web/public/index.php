@@ -5,14 +5,9 @@
 	
 	<!--
 		TODO:
-			Need icon & set favicon for app.
-			
 			Button to expand/collapse all.
 			
 			Only show top x notes. Order by last updated ascending.
-			
-			
-			
 			
 			Use templates for:
 				header
@@ -30,10 +25,7 @@
 	<meta name="author" content="Cygnut">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<!-- TODO: put shortcut icon in!
-	<link rel="shortcut icon" href="img/content/PocoIcon-64x64-Transparent.png" />
-	-->
+	<link rel="shortcut icon" href="img/content/moteIcon-64x64-Transparent.png" />
 	
 	<script src="vendor/jquery-3.1.1.min.js"></script>
 	<link rel="stylesheet" href="css/accordion.css">
