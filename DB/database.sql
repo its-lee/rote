@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS `note_category`;
 CREATE TABLE `note_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `when_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `when_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

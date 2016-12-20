@@ -67,7 +67,7 @@ class MoteClient
 		try
 		{
 			return $this->client->executeNonQuery(
-				"insert into note (title,content,category_id) values ('$title','$content',$category_id);"
+				"insert into note (title, content, category_id) values ('$title' ,'$content' ,$category_id);"
 				);
 		}
 		catch (Exception $e)
@@ -82,9 +82,13 @@ class MoteClient
 		try
 		{
 			$q = "update note set ";
-			if (!is_null($title)) $q .= "title = '$title'";
-			if (!is_null($content)) $q .= "content = '$content'";
-			$q .= " where id = $id;";
+			
+			$fields = [];
+			if (!is_null($title)) $fields[] = "title = '$title' ";
+			if (!is_null($content)) $fields[] = "content = '$content' ";
+			if (!empty($fields)) $q .= implode(", ", $fields) . " ";
+			
+			$q .= "where id = $id;";
 			
 			$this->client->executeNonQuery($q);
 		}
@@ -124,6 +128,7 @@ class MoteClient
 				$items[] = array(
 					"id" => $row["id"],
 					"name" => $row["name"],
+					"description" => $row["description"],
 					"when_created" => $row["when_created"],
 					"when_updated" => $row["when_updated"]
 				);
@@ -138,12 +143,14 @@ class MoteClient
 		}
 	}
 	
-	public function insertNoteCategory($name)
+	public function insertNoteCategory($name, $description)
 	{
 		try
 		{
+			echo 'here';
+			
 			return $this->client->executeNonQuery(
-				"insert into note_category (name) values ('$name');"
+				"insert into note_category (name, description) values ('$name', '$description');"
 				);
 		}
 		catch (Exception $e)
@@ -153,13 +160,19 @@ class MoteClient
 		}
 	}
 	
-	public function updateNoteCategory($id, $name)
+	public function updateNoteCategory($id, $name, $description)
 	{
 		try
 		{
-			$this->client->executeNonQuery(
-				"update note_category set name = '$name' where id = $id;"
-				);
+			$q = "update note_category set ";
+			
+			$fields = [];
+			if (!is_null($name)) $fields[] = "name = '$name' ";
+			if (!is_null($description)) $fields[] = "description = '$description' ";
+			if (!empty($fields)) $q .= implode(", ", $fields) . " ";
+			$q .= " where id = $id;";
+			
+			$this->client->executeNonQuery($q);
 		}
 		catch (Exception $e)
 		{

@@ -5,7 +5,11 @@
 	
 	<!--
 		TODO:
-			Navigation menu in header.html.
+			HANDLE SQL INJECTIONS!!
+			
+			Navigation sidebar menu in header.html.
+			Get rid of categories section.
+			Put search into sidebar.
 			
 			Use templates (twig?) for:
 				accordion item
@@ -33,8 +37,6 @@
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/accordion.css">
 	
-	<title>Mote</title>
-	
 <script>
 </script>
 </head>
@@ -42,26 +44,35 @@
 <?php include(realpath(dirname(__FILE__) . "./header.html")); ?>
 
 <article>
-	<h3>Find note:</h3>
-	<form action="notes.php">
-		<p>Category</p>
-		<select name="category_id" class="w3-btn" id="category-select" onchange="selectCategory()">
-		<?php
-			require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
-			
-			$client = new MoteClient();
-			$items = $client->getNoteCategories();
-			
-			echo "<option value=''>All Categories</option>";
-			
-			foreach ($items as $item)
-				echo "<option value=" . $item["id"] . ">" . $item["name"] . "</option>";
-		?>
-		</select>
-		<p>Title</p>
-		<input class="w3-btn" type="text" name="title"></input><br/><br/>
-		<input class="w3-btn" type="submit" value="Find"></input>
-	</form>
+	
+	<section>
+	<h3>Categories</h3>
+	<a class="w3-btn" href="categories.php">Manage</a>
+	</section>
+	
+	<section>
+		<h3>Find note</h3>
+		<form action="notes.php">
+			<p>Category</p>
+			<select name="category_id" class="w3-btn" id="category-select" onchange="selectCategory()">
+			<?php
+				require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
+				
+				$client = new MoteClient();
+				$items = $client->getNoteCategories();
+				
+				echo "<option value=''>All Categories</option>";
+				
+				foreach ($items as $item)
+					echo "<option value=" . $item["id"] . ">" . $item["name"] . "</option>";
+			?>
+			</select>
+			<p>Title</p>
+			<input class="w3-btn" type="text" name="title"></input><br/><br/>
+			<input class="w3-btn" type="submit" value="Find"></input>
+		</form>
+	</section>
+	
 </article>
 
 <?php include(realpath(dirname(__FILE__) . "./footer.html")); ?>
