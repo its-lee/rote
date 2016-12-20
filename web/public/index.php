@@ -7,7 +7,6 @@
 		TODO:
 			HANDLE SQL INJECTIONS!!
 			
-			Use htmlescape on inserted stuff.
 			Navigation sidebar menu in header.html.
 			Get rid of categories section.
 			Put search into sidebar.
