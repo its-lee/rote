@@ -59,10 +59,10 @@ function rowClick(id)
 		
 		foreach ($items as $item)
 			echo 
-				"<tr data-id='" . $item["id"] . "' onclick='rowClick(" . $item["id"] . ")'>" . 
-				"<td>" . $item["name"] . "</td>" . 
-				"<td>" . $item["when_created"] . "</td>" . 
-				"<td>" . $item["when_updated"] . "</td>" . 
+				"<tr onclick='rowClick(" . htmlspecialchars($item["id"]) . ")'>" . 
+				"<td>" . htmlspecialchars($item["name"]) . "</td>" . 
+				"<td>" . htmlspecialchars($item["when_created"]) . "</td>" . 
+				"<td>" . htmlspecialchars($item["when_updated"]) . "</td>" . 
 				"</tr>";
 		
 	?>

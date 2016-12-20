@@ -66,7 +66,7 @@
 				if ($category_id == $item["id"])
 					$selectedAttr = "selected='selected'";
 				
-				echo "<option value=" . $item["id"] . " $selectedAttr>" . $item["name"] . "</option>";
+				echo "<option value=" . htmlspecialchars($item["id"]) . " $selectedAttr>" . htmlspecialchars($item["name"]) . "</option>";
 			}
 		?>
 		</select><br/>

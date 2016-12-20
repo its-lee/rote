@@ -67,7 +67,7 @@
 				echo "<option value=''>All Categories</option>";
 				
 				foreach ($items as $item)
-					echo "<option value=" . $item["id"] . ">" . $item["name"] . "</option>";
+					echo "<option value=" . htmlspecialchars($item["id"]) . ">" . htmlspecialchars($item["name"]) . "</option>";
 			?>
 			</select>
 			<p>Title</p>

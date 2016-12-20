@@ -57,12 +57,12 @@ function accordionClick(b) {
 			echo "<div class='accordion-div'>";
 			foreach ($items as $item)
 			{
-				echo "<button class='expand-btn' onclick='accordionClick(this)'>" . $item["category_name"] . " | " . $item["title"] . "</button>";
+				echo "<button class='expand-btn' onclick='accordionClick(this)'>" . htmlspecialchars($item["category_name"] . " | " . $item["title"]) . "</button>";
 				
-				echo "<div id='note-" . $item["id"] . "' class='panel'>";
-				echo "<p class='topnote'>Created " . $item["when_created"] . ", updated " . $item["when_updated"] . ". </p>";
-				echo "<p>" . $item["content"] . "</p>";
-				echo "<a class='w3-btn' href='/note.php?id=" . $item["id"] . "'>Edit</a>";
+				echo "<div id='note-" . htmlspecialchars($item["id"]) . "' class='panel'>";
+				echo "<p class='topnote'>Created " . htmlspecialchars($item["when_created"] . ", updated " . $item["when_updated"]) . ". </p>";
+				echo "<p>" . htmlspecialchars($item["content"]) . "</p>";
+				echo "<a class='w3-btn' href='/note.php?id=" . htmlspecialchars($item["id"]) . "'>Edit</a>";
 				echo "</div>";
 			}
 			echo "</div>";
