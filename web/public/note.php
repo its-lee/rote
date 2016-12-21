@@ -17,8 +17,11 @@
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/accordion.css">
 	
-<script>
-</script>
+<style>
+textarea {
+	width: 100%;
+}
+</style>
 </head>
 <body>
 <?php include(realpath(dirname(__FILE__) . "./header.html")); 
@@ -46,12 +49,14 @@
 		$category_id = $note ? $note["category_id"] : "";
 	?>
 	
+	<h2><?php echo is_null($id) ? "Create Note" : "Edit Note" ?></h2>
+	
 	<form action="updateNote.php" method="post">
 		<input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
 		<p>Title</p>
 		<input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>"></input><br/>
 		<p>Description</p>
-		<input type="text" name="content" id="content" value="<?php echo htmlspecialchars($content); ?>"></input><br/>
+		<textarea name="content" rows="5"><?php echo htmlspecialchars($content); ?></textarea>
 		<p>Category</p>
 		<select name="category_id" class="w3-btn">
 		<?php

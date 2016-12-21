@@ -18,16 +18,16 @@
 	<link rel="stylesheet" href="css/accordion.css">
 	
 <style>
+textarea {
+	width: 100%;
+}
 </style>
-<script>
-</script>
 </head>
 <body>
 <?php include(realpath(dirname(__FILE__) . "./header.html")); ?>
 
 <article>
 	<?php
-		
 		require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
 		
 		$category = null;
@@ -47,12 +47,15 @@
 		$description = $category ? $category["description"] : "";
 	?>
 	
+	<h2><?php echo is_null($id) ? "Create Category" : "Edit Category" ?></h2>
+	
 	<form action="updateCategory.php" method="post">
 		<input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
 		<p>Name</p>
-		<input type="text" name="name" id="name" value="<?php echo htmlspecialchars($name); ?>"></input><br/>
+		<input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>"></input><br/>
 		<p>Description</p>
-		<input type="text" name="description" id="description" value="<?php echo htmlspecialchars($description); ?>"></input><br/>
+		<textarea name="description" rows="5"><?php echo htmlspecialchars($description); ?></textarea>
+		<br/>
 		<?php if (!is_null($id)) { ?>
 		<p>Delete?<p>
 		<input type="checkbox" name="delete" value=""></input><br/>

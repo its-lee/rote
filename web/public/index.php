@@ -18,7 +18,6 @@
 				Add recent notes on index.php? (okay but when we have templating to reduce duplication)
 			
 			notes.php:
-				Better post format.
 				Button to expand/collapse all.
 				Order by dates.
 	-->
@@ -46,14 +45,14 @@
 <article>
 	
 	<section>
-	<h3>Categories</h3>
+	<h2>Categories</h2>
 	<a class="w3-btn" href="categories.php">Manage</a>
 	</section>
 	
 	<section>
-		<h3>Notes</h3>
+		<h2>Notes</h2>
 		<a class="w3-btn" href="note.php">Create</a>
-		<h4>Find</h4>
+		<h3>Find</h3>
 		<form action="notes.php">
 			<p>Category</p>
 			<select name="category_id" class="w3-btn" id="category-select" onchange="selectCategory()">
