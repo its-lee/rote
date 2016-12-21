@@ -38,7 +38,7 @@ function accordionClick(b) {
 <?php include(realpath(dirname(__FILE__) . "./header.html")); ?>
 
 <article class="accordion">
-	<h2>Matching Notes</h2>
+	<h2>Notes</h2>
 	<?php
 		require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
 		$client = new MoteClient();
@@ -50,7 +50,7 @@ function accordionClick(b) {
 		
 		if (empty($items))
 		{
-			echo "<p>No results :(</p>";
+			echo "<p>No notes found :(</p>";
 		}
 		else
 		{

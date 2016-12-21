@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mote</title>
-	
-	<!--
-		TODO:
-			HANDLE SQL INJECTIONS!!
-			
-			Navigation sidebar menu in header.html.
-			Get rid of categories section.
-			Put search into sidebar.
-			
-			Use templates (twig?) for:
-				accordion item
-			
-			index.php:
-				Add recent notes on index.php? (okay but when we have templating to reduce duplication)
-			
-			notes.php:
-				Button to expand/collapse all.
-				Order by dates.
-	-->
+	<title>Mote | Search Notes</title>
 	
 	<meta charset="UTF-8">
 	<meta name="description" content="Simple public note database.">
@@ -43,9 +24,30 @@
 <?php include(realpath(dirname(__FILE__) . "./header.html")); ?>
 
 <article>
-
-	<h3>Welcome to Mote :)</h3>
-
+	
+	<section>
+		<h3>Search</h3>
+		<form action="notes.php">
+			<p>Category</p>
+			<select name="category_id" class="w3-btn" id="category-select" onchange="selectCategory()">
+			<?php
+				require_once(realpath(dirname(__FILE__) . "/../library/include.php"));
+				
+				$client = new MoteClient();
+				$items = $client->getNoteCategories();
+				
+				echo "<option value=''>All Categories</option>";
+				
+				foreach ($items as $item)
+					echo "<option value=" . htmlspecialchars($item["id"]) . ">" . htmlspecialchars($item["name"]) . "</option>";
+			?>
+			</select>
+			<p>Title</p>
+			<input class="w3-btn" type="text" name="title"></input><br/><br/>
+			<input class="w3-btn" type="submit" value="OK"></input>
+		</form>
+	</section>
+	
 </article>
 
 <?php include(realpath(dirname(__FILE__) . "./footer.html")); ?>

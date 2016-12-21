@@ -1,6 +1,38 @@
+<!--
 <header class="header w3-top w3-container w3-teal">
 	<a title="Home" href="index.php">
 		<img src="img/content/moteIcon-100x100-Transparent.png" />
 	</a>
 	<h1>Mote</h1>
+</header>
+-->
+
+
+
+<script>
+function openSidebar() {
+	$("#sidenav").css("display", "block");
+}
+function closeSidebar() {
+	$("#sidenav").css("display", "none");
+}
+
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/w3.css">
+<nav class="w3-sidenav w3-top w3-card-2" style="width:200px;display:none;z-index:2" id="sidenav">
+	<span onclick="closeSidebar()" style="margin-right: 10px;" class="w3-closenav w3-right w3-xlarge">x</span>
+	<br/>
+	<br/>
+	<a href="index.php">Home</a>
+	<a href="notes.php">Recent Notes</a>
+	<a href="searchNotes.php">Search Notes</a>
+	<a href="note.php">Create Note</a>
+	<a href="categories.php">Categories</a>
+</nav>
+<header class="header w3-top w3-container w3-teal">
+	<h1>
+	<i class="w3-opennav fa fa-bars" onclick="openSidebar()"></i>
+	Mote
+	</h1>
 </header>
