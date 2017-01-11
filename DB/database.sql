@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `mote`;
-USE `mote`;
+CREATE DATABASE  IF NOT EXISTS `rote`;
+USE `rote`;
 
 /* Turn foreign key checks off temporarily to allow possible deletion of linked tables. */
 SET FOREIGN_KEY_CHECKS=0;
