@@ -20,6 +20,7 @@ RoteClient.prototype =
 	
 	// params = { id, name, description }
 	updateCategory: function(params, cb) {
+		console.log(params);
 		return this.putData("/category", params, cb);
 	},
 	
@@ -39,7 +40,7 @@ RoteClient.prototype =
 	},
 	
 	// params = { id, title, content, category_id }
-	updateCategory: function(params, cb) {
+	updateNote: function(params, cb) {
 		return this.putData("/note", params, cb);
 	},
 	
@@ -69,7 +70,10 @@ RoteClient.prototype =
 		return this.$http({
 			method: method,
 			url: path,
-			data: data
+			data: data,
+			headers: {
+				"Content-Type": "application/json"
+			}
 		}).then(
 		function(response) { cb(null, response); },
 		function(response) { cb("error", response); });

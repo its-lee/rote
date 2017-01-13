@@ -22,7 +22,7 @@
 	<!-- Angular model -->
 	<script src="js/RoteClient.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/services/ModalService.js"></script>
+	<script src="js/services/CategoryModalService.js"></script>
 	<script src="js/controllers/category.js"></script>
 	<script src="js/controllers/note.js"></script>
 	
@@ -42,7 +42,14 @@ function accordionClick(b) {
 
 </script>
 <style>
+.accordion-panel button {
+	margin: 3px;
+}
 
+.accordion ~ button {
+	float: right;
+	margin: 10px 0 10px 0;
+}
 </style>
 </head>
 <body ng-app="rote">
@@ -68,6 +75,7 @@ function accordionClick(b) {
 					<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
 				</div>
 			</div>
+			<button class="btn btn-primary" ng-click="addCategory();">New Category</button>
 		</div>
 	</section>
 	
