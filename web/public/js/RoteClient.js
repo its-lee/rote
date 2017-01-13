@@ -30,11 +30,11 @@ RoteClient.prototype =
 	
 	// params = { id, offset, limit, category_id, title }
 	getNotes: function(params, cb) {
-		return this.getData("/note", params, cb)
-	}
+		return this.getData("/note", params, cb);
+	},
 	
 	// params = { title, content, category_id }
-	addNote: function(params, cb, eb) {
+	addNote: function(params, cb) {
 		return this.postData("/note", params, cb);
 	},
 	
@@ -53,21 +53,19 @@ RoteClient.prototype =
 	
 	// private:
 	postData: function(path, data, cb) {
-		return bodyData("POST", path, data, cb);
-	}
+		return this.bodyData("POST", path, data, cb);
+	},
 	
 	putData: function(path, data, cb) {
-		return bodyData("PUT", path, data, cb);
-	}
+		return this.bodyData("PUT", path, data, cb);
+	},
 	
 	deleteData: function(path, data, cb) {
-		return bodyData("DELETE", path, data, cb);
-	}
+		return this.bodyData("DELETE", path, data, cb);
+	},
 	
 	bodyData: function(method, path, data, cb)
 	{
-		eb = eb || this.defaultErrorCallback;
-		
 		return this.$http({
 			method: method,
 			url: path,
@@ -79,8 +77,6 @@ RoteClient.prototype =
 	
 	getData: function(path, params, cb)
 	{
-		eb = eb || this.defaultErrorCallback;
-		
 		return this.$http({
 			method: "GET",
 			url: path,
