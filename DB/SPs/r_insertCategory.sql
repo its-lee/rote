@@ -14,7 +14,9 @@ BEGIN
         _description
     );
     
-    select last_insert_id() as id;
+    select * 
+    from note_category
+    where id = last_insert_id();
     
 END$$
 DELIMITER ;

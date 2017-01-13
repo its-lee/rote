@@ -38,7 +38,10 @@ function NoteController(config)
 	this.getNote = function(req, res)
 	{
 		this.run(function(con, done) {
-			con.query('call r_getNote(?, ?, ?, ?, ?)', [ req.query.id, req.query.offset, req.query.limit, req.query.category_id, req.query.title ], function(err, rows) {
+			con.query(
+				'call r_getNote(?, ?, ?, ?, ?)', 
+				[ req.query.id, req.query.offset, req.query.limit, req.query.category_id, req.query.title ], 
+				function(err, rows) {
 				if (err) {
 					log.error(`r_getNote failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to get notes with id ${req.query.id}.` });
@@ -53,7 +56,10 @@ function NoteController(config)
 	this.insertNote = function(req, res)
 	{
 		this.run(function(con, done) {
-			con.query('call r_insertNote(?, ?, ?)', [ req.body.title, req.body.content, req.body.category_id ], function(err, rows) {
+			con.query(
+				'call r_insertNote(?, ?, ?)', 
+				[ req.body.title || '', req.body.content || '', req.body.category_id ], 
+				function(err, rows) {
 				if (err) { 
 					log.error(`r_insertNote failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to insert new note.` });
@@ -68,12 +74,15 @@ function NoteController(config)
 	this.updateNote = function(req, res)
 	{
 		this.run(function(con, done) {
-			con.query('call r_updateNote(?, ?, ?, ?)', [ req.body.id, req.body.title, req.body.content, req.body.category_id ], function(err, rows) {
+			con.query(
+				'call r_updateNote(?, ?, ?, ?)', 
+				[ req.body.id, req.body.title || '', req.body.content || '', req.body.category_id ], 
+				function(err, rows) {
 				if (err) { 
 					log.error(`r_updateNote failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to update note with id ${req.body.id}.` });
 				}
-				else res.json({});
+				else res.json(rows[0]);
 				
 				return done();
 			});
@@ -83,7 +92,10 @@ function NoteController(config)
 	this.deleteNote = function(req, res)
 	{
 		this.run(function(con, done) {
-			con.query('call r_deleteNote(?)', [ req.body.id ], function(err, rows) {
+			con.query(
+				'call r_deleteNote(?)', 
+				[ req.body.id ], 
+				function(err, rows) {
 				if (err) { 
 					log.error(`r_deleteNote failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to delete note with id ${req.body.id}.` });

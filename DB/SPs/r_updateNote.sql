@@ -14,6 +14,10 @@ BEGIN
         category_id = coalesce(_category_id, category_id),
         when_updated = now()
     where id = _id;
-    
+   
+	select *
+    from note
+    where id = _id;
+   
 END$$
 DELIMITER ;

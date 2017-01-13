@@ -20,7 +20,6 @@ RoteClient.prototype =
 	
 	// params = { id, name, description }
 	updateCategory: function(params, cb) {
-		console.log(params);
 		return this.putData("/category", params, cb);
 	},
 	

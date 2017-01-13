@@ -37,7 +37,10 @@ function CategoryController(config)
 	
 	this.getCategory = function(req, res) {
 		this.run(function(con, done) {
-			con.query('call r_getCategory(?)', [ req.query.id ], function(err, rows) {
+			con.query(
+				'call r_getCategory(?)', 
+				[ req.query.id ], 
+				function(err, rows) {
 				if (err) {
 					log.error(`r_getCategory failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to get categories with id ${req.query.id}.` })
@@ -51,7 +54,10 @@ function CategoryController(config)
 	
 	this.insertCategory = function(req, res) {
 		this.run(function(con, done) {
-			con.query('call r_insertCategory(?, ?)', [ req.body.name, req.body.description ], function(err, rows) {
+			con.query(
+				'call r_insertCategory(?, ?)', 
+				[ req.body.name || '', req.body.description || '' ], 
+				function(err, rows) {
 				if (err) {
 					log.error(`r_insertCategory failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to insert new category.` });
@@ -65,12 +71,15 @@ function CategoryController(config)
 	
 	this.updateCategory = function(req, res) {
 		this.run(function(con, done) {
-			con.query('call r_updateCategory(?, ?, ?)', [ req.body.id, req.body.name, req.body.description ], function(err, rows) {
+			con.query(
+				'call r_updateCategory(?, ?, ?)', 
+				[ req.body.id, req.body.name || '', req.body.description || ''], 
+				function(err, rows) {
 				if (err) {
 					log.error(`r_updateCategory failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to update category with id ${req.body.id}.` });
 				} 
-				else res.json({});
+				else res.json(rows[0]);
 				
 				return done();
 			});
@@ -79,7 +88,10 @@ function CategoryController(config)
 	
 	this.deleteCategory = function(req, res) {
 		this.run(function(con, done) {
-			con.query('call r_deleteCategory(?)', [ req.body.id ], function(err, rows) {
+			con.query(
+				'call r_deleteCategory(?)', 
+				[ req.body.id ], 
+				function(err, rows) {
 				if (err) {
 					log.error(`r_updateCategory failed with error ${err}.`);
 					res.status(400).json({ error: `Failed to delete category with id ${req.body.id}.` });

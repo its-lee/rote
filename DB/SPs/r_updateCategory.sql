@@ -13,5 +13,9 @@ BEGIN
         when_updated = now()
     where id = _id;
     
+    select *
+    from note_category
+    where id = _id;
+    
 END$$
 DELIMITER ;

@@ -1,7 +1,9 @@
-angular.module('rote').controller('category', ['$scope', '$http', 'CategoryModalService', 
-	function($scope, $http, CategoryModalService) {
+angular.module('rote').controller('category', ['$scope', '$http', 'modalService', 
+	function($scope, $http, modalService) {
 	
 	var rote = new RoteClient($http);
+	
+	const modalTemplateUrl = '/../../partials/category-modal.html';
 	
 	$scope.getCategories = function() {
 		rote.getCategories({}, function(err, response) {
@@ -19,7 +21,9 @@ angular.module('rote').controller('category', ['$scope', '$http', 'CategoryModal
 	
 	$scope.editCategory = function(category) {
 		
-		CategoryModalService.showModal({}, {
+		modalService.showModal({
+			templateUrl: modalTemplateUrl
+		}, {
 			name: category.name,
 			description: category.description
 		}).then(function(result) {
@@ -30,30 +34,31 @@ angular.module('rote').controller('category', ['$scope', '$http', 'CategoryModal
 			}, function(err, response) {
 				if (err) return; 
 				
-				var c = _.find($scope.categories, function(c) { return c.id === category.id });
+				var r = response.data[0];
+				
+				var c = _.find($scope.categories, function(c) { return c.id === r.id });
 				if (!c) return;
 				
-				c.name = result.name;
-				c.description = result.description;
+				c.name = r.name;
+				c.description = r.description;
+				c.when_created = r.when_created;
+				c.when_updated = r.when_updated;
 			});
 		});
 	}
 	
 	$scope.addCategory = function() {
 		
-		CategoryModalService.showModal({}, {})
+		modalService.showModal({
+			templateUrl: modalTemplateUrl
+		}, {})
 		.then(function(result) {
 			rote.addCategory({
 				name: result.name,
 				description: result.description
 			}, function(err, response) {
 				if (err) return;
-				
-				$scope.categories.push({
-					id: response.data[0].id,
-					name: result.name,
-					description: result.description
-				});
+				$scope.categories.push(response.data[0]);
 			});
 		});
 	}
