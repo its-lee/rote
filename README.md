@@ -1,2 +1,2 @@
 # rote
-Simple public note database using NodeJs & Angular2.
+Simple public note database using NodeJs & Angular.
