@@ -12,18 +12,23 @@
 	<link rel="shortcut icon" href="img/content/moteIcon-64x64-Transparent.png" />
 	
 	<script src="vendor/jquery-3.1.1.min.js"></script>
-	<script src="vendor/angular.min-1.5.7.js"></script>
 	<script src="vendor/underscore-1.8.3.js"></script>
 	
-	<link rel="stylesheet" href="vendor/w3.css"/>
-	<link rel="stylesheet" href="css/common.css"/>
-	<link rel="stylesheet" href="css/accordion.css"/>
+	<!-- Angular & linked Bootstrap libs -->
+	<script src="vendor/angular.min-1.5.7.js"></script>
+	<script src="vendor/ui-bootstrap-tpls-2.4.0.js"></script>
+	<script src="vendor/bootstrap-3.3.7/js/bootstrap.js"/></script>
 	
 	<!-- Angular model -->
 	<script src="js/RoteClient.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/services/ModalService.js"></script>
 	<script src="js/controllers/category.js"></script>
 	<script src="js/controllers/note.js"></script>
+	
+	<link rel="stylesheet" href="vendor/bootstrap-3.3.7/css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/common.css"/>
+	<link rel="stylesheet" href="css/accordion.css"/>
 	
 <script>
 
@@ -37,27 +42,31 @@ function accordionClick(b) {
 
 </script>
 <style>
+
 </style>
 </head>
 <body ng-app="rote">
 
-<header class="header w3-top w3-container w3-blue">
-	<img src="img/content/roteIcon-100x100-Transparent.png" />
-	<h1>Rote</h1>
+<header class="container">
+	<div class="jumbotron">
+		<img src="img/content/roteIcon-100x100-Transparent.png" />
+		<h1>Rote</h1>
+	</div>
 </header>
 
 <article>
 	
-	
-	
 	<section class="category" ng-controller="category">
-		<h2>Categories</h2>
-		<div class="accordion" ng-repeat="c in categories">
-			<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
-			<div class="accordion-panel clearfix">
-				<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
-				<p>{{ c.description }}</p>
-				<button class="w3-btn" ng-click="deleteCategory(c);">Delete</button>
+		<div class="clearfix">
+			<h2>Categories</h2>
+			<div class="accordion" ng-repeat="c in categories">
+				<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
+				<div class="accordion-panel clearfix">
+					<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
+					<p>{{ c.description }}</p>
+					<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
+					<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -71,7 +80,7 @@ function accordionClick(b) {
 			<div class="accordion-panel clearfix">
 				<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
 				<p>{{ n.content }}</p>
-				<button class="w3-btn" ng-click="deleteNote(n);">Delete</button>
+				<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
 			</div>
 		</div>
 	</section>

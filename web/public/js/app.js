@@ -1,1 +1,1 @@
-angular.module('rote', []);
+angular.module('rote', ['ui.bootstrap']);

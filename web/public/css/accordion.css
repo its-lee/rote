@@ -44,14 +44,6 @@ div.accordion-panel.show {
 	float: right;
 }
 
-.clearfix:after {
-	content: " "; /* Older browser do not support empty content */
-	visibility: hidden;
-	display: block;
-	height: 50;
-	clear: both;
-}
-
 .accordion-panel .topnote {
 	font-size: x-small;
 }
