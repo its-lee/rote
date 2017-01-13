@@ -17,9 +17,13 @@ BEGIN
         _category_id
     );
     
-    select * 
-    from note
-    where id = last_insert_id();
+	select
+		n.*,
+		nc.name as category_name
+	from note n
+	inner join note_category nc
+	on n.category_id = nc.id
+    where n.id = last_insert_id();
 	
 END$$
 DELIMITER ;

@@ -47,3 +47,13 @@ div.accordion-panel.show {
 .accordion-panel .topnote {
 	font-size: x-small;
 }
+
+.accordion-panel button {
+	margin: 3px;
+}
+
+.accordion-header button {
+	float: right;
+	vertical-align: text-bottom;
+	/*margin: 10px 0 10px 0;*/
+}

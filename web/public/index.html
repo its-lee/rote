@@ -42,14 +42,6 @@ function accordionClick(b) {
 
 </script>
 <style>
-.accordion-panel button {
-	margin: 3px;
-}
-
-.accordion ~ button {
-	float: right;
-	margin: 10px 0 10px 0;
-}
 </style>
 </head>
 <body ng-app="rote">
@@ -65,7 +57,10 @@ function accordionClick(b) {
 	
 	<section class="category" ng-controller="category">
 		<div class="clearfix">
-			<h2>Categories</h2>
+			<div class="accordion-header clearfix">
+				<button class="btn btn-primary" ng-click="addCategory();">+</button>
+				<h2>Categories</h2>
+			</div>
 			<div class="accordion" ng-repeat="c in categories">
 				<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
 				<div class="accordion-panel clearfix">
@@ -75,20 +70,25 @@ function accordionClick(b) {
 					<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
 				</div>
 			</div>
-			<button class="btn btn-primary" ng-click="addCategory();">New Category</button>
 		</div>
 	</section>
 	
 	<hr/>
 	
 	<section class="note" ng-controller="note">
-		<h2>Notes</h2>
-		<div class="accordion" ng-repeat="n in notes">
-			<button class="accordion" onclick="accordionClick(this)">{{ n.title }}</button>
-			<div class="accordion-panel clearfix">
-				<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
-				<p>{{ n.content }}</p>
-				<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
+		<div class="accordion-container clearfix">
+			<div class="accordion-header clearfix">
+				<button class="btn btn-primary" ng-click="addNote();">+</button>
+				<h2>Notes</h2>
+			</div>
+			<div class="accordion" ng-repeat="n in notes">
+				<button class="accordion" onclick="accordionClick(this)">{{ n.category_name }} | {{ n.title }}</button>
+				<div class="accordion-panel clearfix">
+					<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
+					<p>{{ n.content }}</p>
+					<button class="btn btn-primary" ng-click="editNote(n);">Edit</button>
+					<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
+				</div>
 			</div>
 		</div>
 	</section>

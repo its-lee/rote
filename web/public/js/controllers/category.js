@@ -14,7 +14,6 @@ angular.module('rote').controller('category', ['$scope', '$http', 'modalService'
 	$scope.deleteCategory = function(category) {
 		rote.deleteCategory({ id: category.id }, function(err, response) {
 			if (err) return;
-			
 			$scope.categories = _.reject($scope.categories, function(c) { return c.id === category.id; });
 		});
 	}
