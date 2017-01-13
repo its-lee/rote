@@ -44,7 +44,7 @@ RoteClient.prototype =
 	},
 	
 	// params = { id }
-	deleteCategory: function(params, cb) {
+	deleteNote: function(params, cb) {
 		return this.deleteData("/note", params, cb);
 	},
 	
