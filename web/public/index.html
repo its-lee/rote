@@ -15,9 +15,9 @@
 	<script src="vendor/angular.min-1.5.7.js"></script>
 	<script src="vendor/underscore-1.8.3.js"></script>
 	
-	<link rel="stylesheet" href="vendor/w3.css">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/accordion.css">
+	<link rel="stylesheet" href="vendor/w3.css"/>
+	<link rel="stylesheet" href="css/common.css"/>
+	<link rel="stylesheet" href="css/accordion.css"/>
 	
 	<!-- Angular model -->
 	<script src="js/RoteClient.js"></script>
@@ -37,84 +37,6 @@ function accordionClick(b) {
 
 </script>
 <style>
-header img {
-	margin: 10px;
-	width: 50px;
-	height: 50px;
-	float: left;
-}
-
-article {
-	padding: 5px 5px 5px 5px;
-	margin: 95px 10px 45px 10px;
-	
-	border-width: 15px 15px 15px 15px;
-	border-style: solid;
-	border-color: white;
-}
-
-section h1,h2,h3 {
-	text-align: center;
-}
-
-/* Accordion styling */
-.accordion > button {
-	background-color: #eee;
-	color: #444;
-	cursor: pointer;
-	padding: 18px;
-	width: 100%;
-	text-align: left;
-	border: none;
-	outline: none;
-}
-
-div.accordion {
-	border: #444 solid thin;
-}
-
-.accordion > button:after {
-	content: '+';
-	float: right;
-	margin-left: 5px;
-}
-
-.accordion > button.active:after {
-	content: "-"; 
-}
-
-.accordion buttonactive, .accordion button:hover {
-	background-color: #ddd;
-}
-
-/* Base accordion panel style which can be overridden by show. */
-div.accordion-panel {
-	padding: 0 18px 18px;
-	background-color: white;
-	display: none;
-}
-
-/* Accordion panel style override when shown */
-div.accordion-panel.show {
-	display: block;
-}
-
-.accordion-panel button {
-	float: right;
-}
-
-.clearfix:after {
-	content: " "; /* Older browser do not support empty content */
-	visibility: hidden;
-	display: block;
-	height: 50;
-	clear: both;
-}
-
-.accordion-panel .topnote {
-	font-size: x-small;
-}
-
 </style>
 </head>
 <body ng-app="rote">
@@ -125,6 +47,8 @@ div.accordion-panel.show {
 </header>
 
 <article>
+	
+	
 	
 	<section class="category" ng-controller="category">
 		<h2>Categories</h2>
