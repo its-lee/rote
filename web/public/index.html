@@ -34,8 +34,8 @@
 	<!--
 		Filtering notes
 		Searching notes
-		expand/collapse all
-		centre add new buttons.
+		Format datetimes better UTC.
+		vertically centre add new buttons.
 		
 		
 		
@@ -45,12 +45,37 @@
 	
 <script>
 
-function accordionClick(b) {
-	
+function accordionChange(selector, action)
+{
 	// Make it clear which accordion element we clicked on.
-	$(b).toggleClass("active");
+	var btn = $(selector);
+	switch (action)
+	{
+		case 'toggle': btn.toggleClass('active'); break;
+		case 'expand': btn.addClass('active'); break;
+		case 'collapse': btn.removeClass('active'); break;
+	}
+	
 	// Drop the accordion content by changing the class.
-	$(b).next().toggleClass("show");
+	var div = btn.next();
+	switch (action)
+	{
+		case 'toggle': div.toggleClass('show'); break;
+		case 'expand': div.addClass('show'); break;
+		case 'collapse': div.removeClass('show'); break;
+	}
+}
+
+function toggleAccordion(btn) {
+	accordionChange(btn, 'toggle');
+}
+
+function expandAll(type) {
+	accordionChange('#' + type + ' button.accordion', 'expand');
+}
+
+function collapseAll(type) {
+	accordionChange('#' + type + ' button.accordion', 'collapse');
 }
 
 </script>
@@ -85,10 +110,11 @@ header img {
 				<div class="accordion-container clearfix">
 					<div class="accordion-header clearfix">
 						<button class="btn btn-primary" ng-click="addNote();">Add New Note</button>
-						<!--<h2>Notes</h2>-->
+						<button class="btn btn-secondary" onclick="expandAll('notes');">+</button>
+						<button class="btn btn-secondary" onclick="collapseAll('notes');">-</button>
 					</div>
 					<div class="accordion" ng-repeat="n in notes">
-						<button class="accordion" onclick="accordionClick(this)">{{ n.category_name }} | {{ n.title }}</button>
+						<button class="accordion" onclick="toggleAccordion(this)">{{ n.category_name }} | {{ n.title }}</button>
 						<div class="accordion-panel clearfix">
 							<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
 							<p>{{ n.content }}</p>
@@ -105,10 +131,11 @@ header img {
 				<div class="clearfix">
 					<div class="accordion-header clearfix">
 						<button class="btn btn-primary" ng-click="addCategory();">Add New category</button>
-						<!--<h2>Categories</h2>-->
+						<button class="btn btn-secondary" onclick="expandAll('categories');">+</button>
+						<button class="btn btn-secondary" onclick="collapseAll('categories');">-</button>
 					</div>
 					<div class="accordion" ng-repeat="c in categories">
-						<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
+						<button class="accordion" onclick="toggleAccordion(this)">{{ c.name }}</button>
 						<div class="accordion-panel clearfix">
 							<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
 							<p>{{ c.description }}</p>
