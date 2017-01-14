@@ -25,6 +25,7 @@ angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'c
 		modalService.showModal({
 			templateUrl: modalTemplateUrl
 		}, {
+			modalTitle: 'Edit Note',
 			categories: categoryService.categories,
 			title: note.title,
 			content: note.content,
@@ -57,6 +58,7 @@ angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'c
 		modalService.showModal({
 			templateUrl: modalTemplateUrl
 		}, {
+			modalTitle: 'Create Note',
 			categories: categoryService.categories,
 		})
 		.then(function(result) {

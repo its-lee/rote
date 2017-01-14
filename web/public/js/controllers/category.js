@@ -12,6 +12,7 @@ angular.module('rote').controller('category', ['$scope', '$http', 'modalService'
 		modalService.showModal({
 			templateUrl: modalTemplateUrl
 		}, {
+			modalTitle: 'Edit Category',
 			id: category.id,
 			name: category.name,
 			description: category.description
@@ -24,7 +25,9 @@ angular.module('rote').controller('category', ['$scope', '$http', 'modalService'
 		
 		modalService.showModal({
 			templateUrl: modalTemplateUrl
-		}, {})
+		}, {
+			modalTitle: 'Create Category'
+		})
 		.then(function(result) {
 			categoryService.add(result);
 		});

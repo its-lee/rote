@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h3>Note</h3>
+	<h3>{{ modalOptions.modalTitle }}</h3>
 </div>
 <div class="modal-body">
 	
@@ -8,29 +8,12 @@
 		<input type="text" ng-model="modalOptions.title"></input><br/>
 		<br/>
 		<label>Category</label><br/>
-		
 		<select 
 			ng-init="modalOptions.selectedCategory = modalOptions.selectedCategory || modalOptions.categories[0]"
 			ng-model="modalOptions.selectedCategory"
 			ng-options="category as category.name for category in modalOptions.categories" 
 		/>
 		<br/>
-		
-		<!--
-		<select ng-model="modalOptions.category_id">
-			
-			
-			
-			<option 
-				ng-repeat="c in modalOptions.categories"
-				ng-value="{{ c.id }}"
-				>
-			{{ c.name }}
-			</option>
-		</select>
-		<br/>
-		-->
-		
 		<br/>
 		<label>Content</label><br/>
 		<input type="text" ng-model="modalOptions.content"></input><br/>
