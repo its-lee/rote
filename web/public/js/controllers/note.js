@@ -72,6 +72,7 @@ angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'c
 		});
 	}
 	
+	$scope.searchText = '';
 	$scope.notes = [];
 	$scope.getNotes();
 }]);

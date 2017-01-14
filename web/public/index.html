@@ -34,7 +34,6 @@
 	<!--
 		Filtering notes
 		Searching notes
-		Format datetimes better UTC.
 		vertically centre add new buttons.
 		
 		
@@ -85,6 +84,11 @@ header img {
 	float: left;
 }
 
+#notes .search {
+	float: right;
+	margin: 10px 0 10px 0;
+}
+
 </style>
 </head>
 <body ng-app="rote">
@@ -112,11 +116,26 @@ header img {
 						<button class="btn btn-primary" ng-click="addNote();">Add New Note</button>
 						<button class="btn btn-secondary" onclick="expandAll('notes');">+</button>
 						<button class="btn btn-secondary" onclick="collapseAll('notes');">-</button>
+						
+						<form class="search form-inline">
+							<input type="text" class="form-control" placeholder="Search..." ng-model="searchText"></input>
+						</form>
+						
 					</div>
-					<div class="accordion" ng-repeat="n in notes">
+					
+					<!--
+					<div class="accordion-header clearfix">
+						<form class="search form-inline">
+							<input type="text" class="form-control" placeholder="Search..." ng-model="searchText"></input>
+						</form>
+					</div>
+					-->
+					
+					
+					<div class="accordion" ng-repeat="n in notes | filter:searchText ">
 						<button class="accordion" onclick="toggleAccordion(this)">{{ n.category_name }} | {{ n.title }}</button>
 						<div class="accordion-panel clearfix">
-							<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
+							<p class='topnote'>Created at {{ n.when_created }}, updated at {{ n.when_updated }}.</p>
 							<p>{{ n.content }}</p>
 							<button class="btn btn-primary" ng-click="editNote(n);">Edit</button>
 							<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
@@ -130,14 +149,14 @@ header img {
 			<div class="category" ng-controller="category">
 				<div class="clearfix">
 					<div class="accordion-header clearfix">
-						<button class="btn btn-primary" ng-click="addCategory();">Add New category</button>
+						<button class="btn btn-primary" ng-click="addCategory();">Add New Category</button>
 						<button class="btn btn-secondary" onclick="expandAll('categories');">+</button>
 						<button class="btn btn-secondary" onclick="collapseAll('categories');">-</button>
 					</div>
 					<div class="accordion" ng-repeat="c in categories">
 						<button class="accordion" onclick="toggleAccordion(this)">{{ c.name }}</button>
 						<div class="accordion-panel clearfix">
-							<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
+							<p class='topnote'>Created at {{ c.when_created }}, updated at {{ c.when_updated }}.</p>
 							<p>{{ c.description }}</p>
 							<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
 							<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>

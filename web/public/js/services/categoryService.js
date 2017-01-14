@@ -41,8 +41,9 @@ angular.module('rote').service('categoryService', ['$http', function ($http) {
 	self.delete = function(id) {
 		rote.deleteCategory({ id: id }, function(err, response) {
 			if (err) return;
-			var deleteIdx = _.indexOf(self.categories, function(c) { return c.id === id; });
-			self.categories.splice(deleteIdx, 1);
+			var deleteIdx = _.findIndex(self.categories, function(c) { return c.id === id; });
+			if (deleteIdx >= 0)
+				self.categories.splice(deleteIdx, 1);
 		});
 	}
 	
