@@ -1,21 +1,10 @@
-angular.module('rote').controller('category', ['$scope', '$http', 'modalService', 
-	function($scope, $http, modalService) {
-	
-	var rote = new RoteClient($http);
+angular.module('rote').controller('category', ['$scope', '$http', 'modalService', 'categoryService', 
+	function($scope, $http, modalService, categoryService) {
 	
 	const modalTemplateUrl = '/../../partials/category-modal.html';
 	
-	$scope.getCategories = function() {
-		rote.getCategories({}, function(err, response) {
-			$scope.categories = err ? [] : response.data;
-		});
-	}
-	
 	$scope.deleteCategory = function(category) {
-		rote.deleteCategory({ id: category.id }, function(err, response) {
-			if (err) return;
-			$scope.categories = _.reject($scope.categories, function(c) { return c.id === category.id; });
-		});
+		categoryService.delete(category.id);
 	}
 	
 	$scope.editCategory = function(category) {
@@ -23,26 +12,11 @@ angular.module('rote').controller('category', ['$scope', '$http', 'modalService'
 		modalService.showModal({
 			templateUrl: modalTemplateUrl
 		}, {
+			id: category.id,
 			name: category.name,
 			description: category.description
 		}).then(function(result) {
-			rote.updateCategory({
-				id: category.id,
-				name: result.name,
-				description: result.description
-			}, function(err, response) {
-				if (err) return; 
-				
-				var r = response.data[0];
-				
-				var c = _.find($scope.categories, function(c) { return c.id === r.id });
-				if (!c) return;
-				
-				c.name = r.name;
-				c.description = r.description;
-				c.when_created = r.when_created;
-				c.when_updated = r.when_updated;
-			});
+			categoryService.update(result);
 		});
 	}
 	
@@ -52,16 +26,9 @@ angular.module('rote').controller('category', ['$scope', '$http', 'modalService'
 			templateUrl: modalTemplateUrl
 		}, {})
 		.then(function(result) {
-			rote.addCategory({
-				name: result.name,
-				description: result.description
-			}, function(err, response) {
-				if (err) return;
-				$scope.categories.push(response.data[0]);
-			});
+			categoryService.add(result);
 		});
 	}
 	
-	$scope.categories = [];
-	$scope.getCategories();
+	$scope.categories = categoryService.categories;
 }]);

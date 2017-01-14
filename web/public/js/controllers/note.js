@@ -1,5 +1,5 @@
-angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 
-	function($scope, $http, modalService) {
+angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'categoryService', 
+	function($scope, $http, modalService, categoryService) {
 	
 	var rote = new RoteClient($http);
 	
@@ -20,69 +20,55 @@ angular.module('rote').controller('note', ['$scope', '$http', 'modalService',
 	
 	$scope.editNote = function(note) {
 		
-		rote.getCategories({}, function(err, response) {
-			var categories = err ? [] : response.data;
-			
-			var selectedCategory = _.find(categories, function(c) { return c.id === note.category_id });
-			
-			modalService.showModal({
-				templateUrl: modalTemplateUrl
-			}, {
-				categories: categories,
-				title: note.title,
-				content: note.content,
-				selectedCategory: selectedCategory,
-			}).then(function(result) {
-				rote.updateNote({
-					id: note.id,
-					title: result.title,
-					content: result.content,
-					category_id: result.selectedCategory.id
-				}, function(err, response) {
-					if (err) return; 
-					
-					var r = response.data[0];
-					
-					var n = _.find($scope.notes, function(n) { return n.id === r.id });
-					if (!n) return;
-					
-					n.title = r.title;
-					n.content = r.content;
-					n.category_id = result.selectedCategory.id;
-					n.category_name = result.selectedCategory.name;
-					n.when_created = r.when_created;
-					n.when_updated = r.when_updated;
-				});
+		var selectedCategory = _.find(categoryService.categories, function(c) { return c.id === note.category_id });
+		
+		modalService.showModal({
+			templateUrl: modalTemplateUrl
+		}, {
+			categories: categoryService.categories,
+			title: note.title,
+			content: note.content,
+			selectedCategory: selectedCategory,
+		}).then(function(result) {
+			rote.updateNote({
+				id: note.id,
+				title: result.title,
+				content: result.content,
+				category_id: result.selectedCategory.id
+			}, function(err, response) {
+				if (err) return; 
+				
+				var r = response.data[0];
+				
+				var n = _.find($scope.notes, function(n) { return n.id === r.id });
+				if (!n) return;
+				
+				n.title = r.title;
+				n.content = r.content;
+				n.category_id = result.selectedCategory.id;
+				n.category_name = result.selectedCategory.name;
+				n.when_created = r.when_created;
+				n.when_updated = r.when_updated;
 			});
-			
-			
-			
 		});
 	}
 	
 	$scope.addNote = function() {
-		
-		rote.getCategories({}, function(err, response) {
-			var categories = err ? [] : response.data;
+		modalService.showModal({
+			templateUrl: modalTemplateUrl
+		}, {
+			categories: categoryService.categories,
+		})
+		.then(function(result) {
 			
-			modalService.showModal({
-				templateUrl: modalTemplateUrl
-			}, {
-				categories: categories,
-			})
-			.then(function(result) {
-				
-				rote.addNote({
-					title: result.title,
-					content: result.content,
-					category_id: result.selectedCategory.id,
-				}, function(err, response) {
-					if (err) return;
-					$scope.notes.push(response.data[0]);
-				});
+			rote.addNote({
+				title: result.title,
+				content: result.content,
+				category_id: result.selectedCategory.id,
+			}, function(err, response) {
+				if (err) return;
+				$scope.notes.push(response.data[0]);
 			});
-			
-			
 		});
 	}
 	

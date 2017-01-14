@@ -23,6 +23,7 @@
 	<script src="js/RoteClient.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/services/modalService.js"></script>
+	<script src="js/services/categoryService.js"></script>
 	<script src="js/controllers/category.js"></script>
 	<script src="js/controllers/note.js"></script>
 	
@@ -55,26 +56,6 @@ function accordionClick(b) {
 
 <article>
 	
-	<section class="category" ng-controller="category">
-		<div class="clearfix">
-			<div class="accordion-header clearfix">
-				<button class="btn btn-primary" ng-click="addCategory();">+</button>
-				<h2>Categories</h2>
-			</div>
-			<div class="accordion" ng-repeat="c in categories">
-				<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
-				<div class="accordion-panel clearfix">
-					<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
-					<p>{{ c.description }}</p>
-					<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
-					<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<hr/>
-	
 	<section class="note" ng-controller="note">
 		<div class="accordion-container clearfix">
 			<div class="accordion-header clearfix">
@@ -88,6 +69,26 @@ function accordionClick(b) {
 					<p>{{ n.content }}</p>
 					<button class="btn btn-primary" ng-click="editNote(n);">Edit</button>
 					<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<hr/>
+	
+	<section class="category" ng-controller="category">
+		<div class="clearfix">
+			<div class="accordion-header clearfix">
+				<button class="btn btn-primary" ng-click="addCategory();">+</button>
+				<h2>Categories</h2>
+			</div>
+			<div class="accordion" ng-repeat="c in categories">
+				<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
+				<div class="accordion-panel clearfix">
+					<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
+					<p>{{ c.description }}</p>
+					<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
+					<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
 				</div>
 			</div>
 		</div>

@@ -45,4 +45,4 @@ angular.module('rote').service('modalService', ['$uibModal',
 			
 			return $uibModal.open(tempModalDefaults).result;
 		};
-	}]);
+}]);
