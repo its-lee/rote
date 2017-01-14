@@ -69,13 +69,22 @@ function collapseAll(type) {
 </script>
 <style>
 
-header img {
-	float: left;
+header {
+	text-align: center;
 }
 
-#notes .search {
+/* Make all buttons and forms stick to the right, with a spacy-vertical margin */
+
+.accordion-header > button, .accordion-header > form {
+	margin: 10px 0 10px 5px;
 	float: right;
-	margin: 10px 0 10px 0;
+}
+
+/* ..but make the first button sit on the left. */
+
+.accordion-header > button:first-of-type {
+	margin-left: 0px;
+	float: none;
 }
 
 </style>
@@ -84,7 +93,6 @@ header img {
 
 <header class="container">
 	<div class="jumbotron">
-		<img src="img/content/roteIcon-100x100-Transparent.png" />
 		<h1>Rote</h1>
 	</div>
 </header>
@@ -103,9 +111,9 @@ header img {
 				<div class="accordion-container clearfix">
 					<div class="accordion-header clearfix">
 						<button class="btn btn-primary" ng-click="addNote();">Add New Note</button>
-						<button class="btn btn-secondary" onclick="expandAll('notes');">+</button>
 						<button class="btn btn-secondary" onclick="collapseAll('notes');">-</button>
-						<form class="search form-inline">
+						<button class="btn btn-secondary" onclick="expandAll('notes');">+</button>
+						<form class="form-inline">
 							<input type="text" class="form-control" placeholder="Search Notes..." ng-model="searchText"></input>
 						</form>
 					</div>
@@ -114,8 +122,8 @@ header img {
 						<div class="accordion-panel clearfix">
 							<p class='topnote'>Created at {{ n.when_created }}, updated at {{ n.when_updated }}.</p>
 							<p>{{ n.content }}</p>
-							<button class="btn btn-primary" ng-click="editNote(n);">Edit</button>
-							<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
+							<button class="btn btn-danger" ng-click="deleteNote(n);">Delete</button>
+							<button class="btn btn-default" ng-click="editNote(n);">Edit</button>
 						</div>
 					</div>
 				</div>
@@ -127,16 +135,16 @@ header img {
 				<div class="clearfix">
 					<div class="accordion-header clearfix">
 						<button class="btn btn-primary" ng-click="addCategory();">Add New Category</button>
-						<button class="btn btn-secondary" onclick="expandAll('categories');">+</button>
 						<button class="btn btn-secondary" onclick="collapseAll('categories');">-</button>
+						<button class="btn btn-secondary" onclick="expandAll('categories');">+</button>
 					</div>
 					<div class="accordion" ng-repeat="c in categories">
 						<button class="accordion" onclick="toggleAccordion(this)">{{ c.name }}</button>
 						<div class="accordion-panel clearfix">
 							<p class='topnote'>Created at {{ c.when_created }}, updated at {{ c.when_updated }}.</p>
 							<p>{{ c.description }}</p>
-							<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
-							<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
+							<button class="btn btn-danger" ng-click="deleteCategory(c);">Delete</button>
+							<button class="btn btn-default" ng-click="editCategory(c);">Edit</button>
 						</div>
 					</div>
 				</div>

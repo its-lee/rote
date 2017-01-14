@@ -24,7 +24,7 @@ div.accordion {
 	content: "-"; 
 }
 
-.accordion buttonactive, .accordion button:hover {
+.accordion button:active, .accordion button:hover {
 	background-color: #ddd;
 }
 
@@ -52,10 +52,3 @@ div.accordion-panel.show {
 	margin: 3px;
 }
 
-.accordion-header button {
-	/*
-	float: right;
-	vertical-align: text-bottom;
-	*/
-	margin: 10px 0 10px 0;
-}
