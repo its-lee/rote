@@ -30,7 +30,7 @@ div.accordion {
 
 /* Base accordion panel style which can be overridden by show. */
 div.accordion-panel {
-	padding: 0 18px 18px;
+	padding: 5px 20px 5px 20px;
 	background-color: white;
 	display: none;
 }
