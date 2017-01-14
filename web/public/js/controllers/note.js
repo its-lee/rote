@@ -1,18 +1,16 @@
-angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'categoryService', 
-	function($scope, $http, modalService, categoryService) {
-	
-	var rote = new RoteClient($http);
+angular.module('rote').controller('note', ['$scope', 'roteService', 'modalService', 'categoryService', 
+	function($scope, roteService, modalService, categoryService) {
 	
 	const modalTemplateUrl = '/../../partials/note-modal.html';
 	
 	$scope.getNotes = function() {
-		rote.getNotes({}, function(err, response) {
+		roteService.getNotes({}, function(err, response) {
 			$scope.notes = err ? [] : response.data;
 		});
 	}
 	
 	$scope.deleteNote = function(note) {
-		rote.deleteNote({ id: note.id }, function(err, response) {
+		roteService.deleteNote({ id: note.id }, function(err, response) {
 			if (err) return;
 			$scope.notes = _.reject($scope.notes, function(n) { return n.id === note.id; });
 		});
@@ -31,7 +29,7 @@ angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'c
 			content: note.content,
 			selectedCategory: selectedCategory,
 		}).then(function(result) {
-			rote.updateNote({
+			roteService.updateNote({
 				id: note.id,
 				title: result.title,
 				content: result.content,
@@ -63,7 +61,7 @@ angular.module('rote').controller('note', ['$scope', '$http', 'modalService', 'c
 		})
 		.then(function(result) {
 			
-			rote.addNote({
+			roteService.addNote({
 				title: result.title,
 				content: result.content,
 				category_id: result.selectedCategory.id,

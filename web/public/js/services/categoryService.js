@@ -1,4 +1,4 @@
-angular.module('rote').service('categoryService', ['$http', function ($http) {
+angular.module('rote').service('categoryService', ['roteService', function (roteService) {
 	
 	var self = this;
 	
@@ -6,10 +6,8 @@ angular.module('rote').service('categoryService', ['$http', function ($http) {
 	// Instead use mutator methods on it!
 	self.categories = [];
 	
-	var rote = new RoteClient($http);
-	
 	self.update = function(category) {
-		rote.updateCategory({
+		roteService.updateCategory({
 			id: category.id,
 			name: category.name,
 			description: category.description
@@ -29,7 +27,7 @@ angular.module('rote').service('categoryService', ['$http', function ($http) {
 	}
 	
 	self.add = function(category, cb) {
-		rote.addCategory({
+		roteService.addCategory({
 			name: category.name,
 			description: category.description
 		}, function(err, response) {
@@ -39,7 +37,7 @@ angular.module('rote').service('categoryService', ['$http', function ($http) {
 	}
 	
 	self.delete = function(id) {
-		rote.deleteCategory({ id: id }, function(err, response) {
+		roteService.deleteCategory({ id: id }, function(err, response) {
 			if (err) return;
 			var deleteIdx = _.findIndex(self.categories, function(c) { return c.id === id; });
 			if (deleteIdx >= 0)
@@ -47,7 +45,7 @@ angular.module('rote').service('categoryService', ['$http', function ($http) {
 		});
 	}
 	
-	rote.getCategories({}, function(err, response) {
+	roteService.getCategories({}, function(err, response) {
 		Array.prototype.push.apply(self.categories, err ? [] : response.data);
 	});
 }]);

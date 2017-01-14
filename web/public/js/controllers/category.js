@@ -1,5 +1,5 @@
-angular.module('rote').controller('category', ['$scope', '$http', 'modalService', 'categoryService', 
-	function($scope, $http, modalService, categoryService) {
+angular.module('rote').controller('category', ['$scope', 'modalService', 'categoryService', 
+	function($scope, modalService, categoryService) {
 	
 	const modalTemplateUrl = '/../../partials/category-modal.html';
 	
