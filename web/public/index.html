@@ -31,6 +31,18 @@
 	<link rel="stylesheet" href="css/common.css"/>
 	<link rel="stylesheet" href="css/accordion.css"/>
 	
+	<!--
+		Filtering notes
+		Searching notes
+		expand/collapse all
+		centre add new buttons.
+		
+		
+		
+		
+		
+	-->
+	
 <script>
 
 function accordionClick(b) {
@@ -61,44 +73,54 @@ header img {
 
 <article class="container">
 	
-	<section class="note" ng-controller="note">
-		<div class="accordion-container clearfix">
-			<div class="accordion-header clearfix">
-				<button class="btn btn-primary" ng-click="addNote();">+</button>
-				<h2>Notes</h2>
-			</div>
-			<div class="accordion" ng-repeat="n in notes">
-				<button class="accordion" onclick="accordionClick(this)">{{ n.category_name }} | {{ n.title }}</button>
-				<div class="accordion-panel clearfix">
-					<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
-					<p>{{ n.content }}</p>
-					<button class="btn btn-primary" ng-click="editNote(n);">Edit</button>
-					<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
+		<li><a data-toggle="tab" href="#categories">Categories</a></li>
+	</ul>
+	
+	<div class="tab-content">
+		
+		<section id="notes" class="tab-pane fade in active">
+			<div class="note" ng-controller="note">
+				<div class="accordion-container clearfix">
+					<div class="accordion-header clearfix">
+						<button class="btn btn-primary" ng-click="addNote();">Add New Note</button>
+						<!--<h2>Notes</h2>-->
+					</div>
+					<div class="accordion" ng-repeat="n in notes">
+						<button class="accordion" onclick="accordionClick(this)">{{ n.category_name }} | {{ n.title }}</button>
+						<div class="accordion-panel clearfix">
+							<p class='topnote'>Created {{ n.when_created }}, updated {{ n.when_updated }}.</p>
+							<p>{{ n.content }}</p>
+							<button class="btn btn-primary" ng-click="editNote(n);">Edit</button>
+							<button class="btn btn-primary" ng-click="deleteNote(n);">Delete</button>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	
-	<hr/>
-	
-	<section class="category" ng-controller="category">
-		<div class="clearfix">
-			<div class="accordion-header clearfix">
-				<button class="btn btn-primary" ng-click="addCategory();">+</button>
-				<h2>Categories</h2>
-			</div>
-			<div class="accordion" ng-repeat="c in categories">
-				<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
-				<div class="accordion-panel clearfix">
-					<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
-					<p>{{ c.description }}</p>
-					<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
-					<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
+		</section>
+		
+		<section id="categories" class="tab-pane fade">
+			<div class="category" ng-controller="category">
+				<div class="clearfix">
+					<div class="accordion-header clearfix">
+						<button class="btn btn-primary" ng-click="addCategory();">Add New category</button>
+						<!--<h2>Categories</h2>-->
+					</div>
+					<div class="accordion" ng-repeat="c in categories">
+						<button class="accordion" onclick="accordionClick(this)">{{ c.name }}</button>
+						<div class="accordion-panel clearfix">
+							<p class='topnote'>Created {{ c.when_created }}, updated {{ c.when_updated }}.</p>
+							<p>{{ c.description }}</p>
+							<button class="btn btn-primary" ng-click="editCategory(c);">Edit</button>
+							<button class="btn btn-primary" ng-click="deleteCategory(c);">Delete</button>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	
+		</section>
+		
+	</div>
 </article>
 
 </body>
