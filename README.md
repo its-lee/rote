@@ -1,4 +1,4 @@
-# rote
+![rote icon](https://github.com/Cygnut/rote/blob/master/web/public/img/content/roteIcon-64x64-Transparent.png)# rote
 Simple public note database using NodeJs, Angular & Bootstrap.
 
 # API
