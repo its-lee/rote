@@ -1,54 +1,54 @@
 /* Accordion styling */
 .accordion > button {
-	background-color: #eee;
-	color: #444;
-	cursor: pointer;
-	padding: 18px;
-	width: 100%;
-	text-align: left;
-	border: none;
-	outline: none;
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
 }
 
 div.accordion {
-	border: #444 solid thin;
+    border: #444 solid thin;
 }
 
 .accordion > button:after {
-	content: '+';
-	float: right;
-	margin-left: 5px;
+    content: '+';
+    float: right;
+    margin-left: 5px;
 }
 
 .accordion > button.active:after {
-	content: "-"; 
+    content: "-"; 
 }
 
 .accordion button:active, .accordion button:hover {
-	background-color: #ddd;
+    background-color: #ddd;
 }
 
 /* Base accordion panel style which can be overridden by show. */
 div.accordion-panel {
-	padding: 5px 20px 5px 20px;
-	background-color: white;
-	display: none;
+    padding: 5px 20px 5px 20px;
+    background-color: white;
+    display: none;
 }
 
 /* Accordion panel style override when shown */
 div.accordion-panel.show {
-	display: block;
+    display: block;
 }
 
 .accordion-panel button {
-	float: right;
+    float: right;
 }
 
 .accordion-panel .topnote {
-	font-size: x-small;
+    font-size: x-small;
 }
 
 .accordion-panel button {
-	margin: 3px;
+    margin: 3px;
 }
 

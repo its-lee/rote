@@ -1,90 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Rote</title>
-	
-	<meta charset="UTF-8">
-	<meta name="description" content="Simple public note database.">
-	<meta name="keywords" content="Notes, Database">
-	<meta name="author" content="Cygnut">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="img/content/roteIcon-64x64-Transparent.png" />
-	
-	<script src="vendor/jquery-3.1.1.min.js"></script>
-	<script src="vendor/underscore-1.8.3.js"></script>
-	
-	<!-- Angular & linked Bootstrap libs -->
-	<script src="vendor/angular.min-1.5.7.js"></script>
-	<script src="vendor/ui-bootstrap-tpls-2.4.0.js"></script>
-	<script src="vendor/bootstrap-3.3.7/js/bootstrap.js"/></script>
-	
-	<!-- Angular model -->
-	<script src="js/app.js"></script>
-	<script src="js/services/modalService.js"></script>
-	<script src="js/services/categoryService.js"></script>
-	<script src="js/services/roteService.js"></script>
-	<script src="js/controllers/category.js"></script>
-	<script src="js/controllers/note.js"></script>
-	
-	<link rel="stylesheet" href="vendor/bootstrap-3.3.7/css/bootstrap.css"/>
-	<link rel="stylesheet" href="css/common.css"/>
-	<link rel="stylesheet" href="css/accordion.css"/>
-	
+    <title>Rote</title>
+    
+    <meta charset="UTF-8">
+    <meta name="description" content="Simple public note database.">
+    <meta name="keywords" content="Notes, Database">
+    <meta name="author" content="Cygnut">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/content/roteIcon-64x64-Transparent.png" />
+    
+    <script src="vendor/jquery-3.1.1.min.js"></script>
+    <script src="vendor/underscore-1.8.3.js"></script>
+    
+    <!-- Angular & linked Bootstrap libs -->
+    <script src="vendor/angular.min-1.5.7.js"></script>
+    <script src="vendor/ui-bootstrap-tpls-2.4.0.js"></script>
+    <script src="vendor/bootstrap-3.3.7/js/bootstrap.js"/></script>
+    
+    <!-- Angular model -->
+    <script src="js/app.js"></script>
+    <script src="js/services/modalService.js"></script>
+    <script src="js/services/categoryService.js"></script>
+    <script src="js/services/roteService.js"></script>
+    <script src="js/controllers/category.js"></script>
+    <script src="js/controllers/note.js"></script>
+    
+    <link rel="stylesheet" href="vendor/bootstrap-3.3.7/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/accordion.css"/>
+    
 <script>
 
 function accordionChange(selector, action)
 {
-	// Make it clear which accordion element we clicked on.
-	var btn = $(selector);
-	switch (action)
-	{
-		case 'toggle': btn.toggleClass('active'); break;
-		case 'expand': btn.addClass('active'); break;
-		case 'collapse': btn.removeClass('active'); break;
-	}
-	
-	// Drop the accordion content by changing the class.
-	var div = btn.next();
-	switch (action)
-	{
-		case 'toggle': div.toggleClass('show'); break;
-		case 'expand': div.addClass('show'); break;
-		case 'collapse': div.removeClass('show'); break;
-	}
+    // Make it clear which accordion element we clicked on.
+    var btn = $(selector);
+    switch (action)
+    {
+        case 'toggle': btn.toggleClass('active'); break;
+        case 'expand': btn.addClass('active'); break;
+        case 'collapse': btn.removeClass('active'); break;
+    }
+    
+    // Drop the accordion content by changing the class.
+    var div = btn.next();
+    switch (action)
+    {
+        case 'toggle': div.toggleClass('show'); break;
+        case 'expand': div.addClass('show'); break;
+        case 'collapse': div.removeClass('show'); break;
+    }
 }
 
 function toggleAccordion(btn) {
-	accordionChange(btn, 'toggle');
+    accordionChange(btn, 'toggle');
 }
 
 function expandAll(type) {
-	accordionChange('#' + type + ' button.accordion', 'expand');
+    accordionChange('#' + type + ' button.accordion', 'expand');
 }
 
 function collapseAll(type) {
-	accordionChange('#' + type + ' button.accordion', 'collapse');
+    accordionChange('#' + type + ' button.accordion', 'collapse');
 }
 
 </script>
 <style>
 
 header {
-	text-align: center;
+    text-align: center;
 }
 
 /* Make all buttons and forms stick to the right, with a spacy-vertical margin */
 
 .accordion-header > button, .accordion-header > form {
-	margin: 10px 0 10px 5px;
-	float: right;
+    margin: 10px 0 10px 5px;
+    float: right;
 }
 
 /* ..but make the first button sit on the left. */
 
 .accordion-header > button:first-of-type {
-	margin-left: 0px;
-	float: none;
+    margin-left: 0px;
+    float: none;
 }
 
 </style>
@@ -92,66 +92,66 @@ header {
 <body ng-app="rote">
 
 <header class="container">
-	<div class="jumbotron">
-		<h1>Rote</h1>
-	</div>
+    <div class="jumbotron">
+        <h1>Rote</h1>
+    </div>
 </header>
 
 <article class="container">
-	
-	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
-		<li><a data-toggle="tab" href="#categories">Categories</a></li>
-	</ul>
-	
-	<div class="tab-content">
-		
-		<section id="notes" class="tab-pane fade in active">
-			<div class="note" ng-controller="note">
-				<div class="accordion-container clearfix">
-					<div class="accordion-header clearfix">
-						<button class="btn btn-primary" ng-click="addNote();">Add New Note</button>
-						<button class="btn btn-secondary" onclick="collapseAll('notes');">-</button>
-						<button class="btn btn-secondary" onclick="expandAll('notes');">+</button>
-						<form class="form-inline">
-							<input type="text" class="form-control" placeholder="Search Notes..." ng-model="searchText"></input>
-						</form>
-					</div>
-					<div class="accordion" ng-repeat="n in notes | filter:searchText ">
-						<button class="accordion" onclick="toggleAccordion(this)">{{ n.category_name }} | {{ n.title }}</button>
-						<div class="accordion-panel clearfix">
-							<p class='topnote'>Created at {{ n.when_created }}, updated at {{ n.when_updated }}.</p>
-							<p>{{ n.content }}</p>
-							<button class="btn btn-danger" ng-click="deleteNote(n);">Delete</button>
-							<button class="btn btn-default" ng-click="editNote(n);">Edit</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<section id="categories" class="tab-pane fade">
-			<div class="category" ng-controller="category">
-				<div class="clearfix">
-					<div class="accordion-header clearfix">
-						<button class="btn btn-primary" ng-click="addCategory();">Add New Category</button>
-						<button class="btn btn-secondary" onclick="collapseAll('categories');">-</button>
-						<button class="btn btn-secondary" onclick="expandAll('categories');">+</button>
-					</div>
-					<div class="accordion" ng-repeat="c in categories">
-						<button class="accordion" onclick="toggleAccordion(this)">{{ c.name }}</button>
-						<div class="accordion-panel clearfix">
-							<p class='topnote'>Created at {{ c.when_created }}, updated at {{ c.when_updated }}.</p>
-							<p>{{ c.description }}</p>
-							<button class="btn btn-danger" ng-click="deleteCategory(c);">Delete</button>
-							<button class="btn btn-default" ng-click="editCategory(c);">Edit</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-	</div>
+    
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
+        <li><a data-toggle="tab" href="#categories">Categories</a></li>
+    </ul>
+    
+    <div class="tab-content">
+        
+        <section id="notes" class="tab-pane fade in active">
+            <div class="note" ng-controller="note">
+                <div class="accordion-container clearfix">
+                    <div class="accordion-header clearfix">
+                        <button class="btn btn-primary" ng-click="addNote();">Add New Note</button>
+                        <button class="btn btn-secondary" onclick="collapseAll('notes');">-</button>
+                        <button class="btn btn-secondary" onclick="expandAll('notes');">+</button>
+                        <form class="form-inline">
+                            <input type="text" class="form-control" placeholder="Search Notes..." ng-model="searchText"></input>
+                        </form>
+                    </div>
+                    <div class="accordion" ng-repeat="n in notes | filter:searchText ">
+                        <button class="accordion" onclick="toggleAccordion(this)">{{ n.category_name }} | {{ n.title }}</button>
+                        <div class="accordion-panel clearfix">
+                            <p class='topnote'>Created at {{ n.when_created }}, updated at {{ n.when_updated }}.</p>
+                            <p>{{ n.content }}</p>
+                            <button class="btn btn-danger" ng-click="deleteNote(n);">Delete</button>
+                            <button class="btn btn-default" ng-click="editNote(n);">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="categories" class="tab-pane fade">
+            <div class="category" ng-controller="category">
+                <div class="clearfix">
+                    <div class="accordion-header clearfix">
+                        <button class="btn btn-primary" ng-click="addCategory();">Add New Category</button>
+                        <button class="btn btn-secondary" onclick="collapseAll('categories');">-</button>
+                        <button class="btn btn-secondary" onclick="expandAll('categories');">+</button>
+                    </div>
+                    <div class="accordion" ng-repeat="c in categories">
+                        <button class="accordion" onclick="toggleAccordion(this)">{{ c.name }}</button>
+                        <div class="accordion-panel clearfix">
+                            <p class='topnote'>Created at {{ c.when_created }}, updated at {{ c.when_updated }}.</p>
+                            <p>{{ c.description }}</p>
+                            <button class="btn btn-danger" ng-click="deleteCategory(c);">Delete</button>
+                            <button class="btn btn-default" ng-click="editCategory(c);">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
 </article>
 
 </body>
